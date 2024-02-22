@@ -873,7 +873,7 @@ MonoBehaviour:
       - m_Target: {fileID: 239076771}
         m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
         m_MethodName: loadScenario
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1433,7 +1433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583645754526697808, guid: 82c09d04ffcd9fd408ad43212643d75b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7204550886082823407, guid: 82c09d04ffcd9fd408ad43212643d75b, type: 3}
       propertyPath: m_text
