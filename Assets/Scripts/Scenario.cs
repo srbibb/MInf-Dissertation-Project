@@ -15,7 +15,7 @@ public class Scenario : ScriptableObject {
 public class Message {
     public string text;
     public Response[] responses;
-    public Question question;
+    public Question[] question;
 }
 
 [System.Serializable]
@@ -26,7 +26,8 @@ public class Response {
 
 }
 [System.Serializable]
-public class Question {
+public class Question { //maybe make it can we share info with x for purpose of y and not have separate box? 
+//also put question under question not message text, and find somewhere for intro text etc.
     public int next;
     public string[] recipients;
     public string purpose;

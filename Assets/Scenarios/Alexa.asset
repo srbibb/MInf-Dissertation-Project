@@ -15,14 +15,32 @@ MonoBehaviour:
   objectID: 0
   objectName: Alexa
   messages:
-  - text: Can we share your data with the following people?
+  - text: Can we share your data with the following people
     responses: []
     question:
-      next: 0
+    - next: 0
       recipients:
       - Partner
-      - Neighbour
+      - Close friends
+      - Visitors
+      - Neighbours
       purpose: 
-      choice:
-      - Yes
-      - No
+      choice: []
+    - next: 0
+      recipients:
+      - Partner
+      - Close friends
+      - Visitor
+      - Neighbours
+      purpose: ' for the purpose of improving the service'
+      choice: []
+    - next: 0
+      recipients:
+      - Service Provider (e.g. Amazon, Google etc.)
+      purpose: 
+      choice: []
+    - next: 0
+      recipients:
+      - Service Provider (e.g. Amazon, Google etc.)
+      purpose: ' for the purpose of improving the service'
+      choice: []
