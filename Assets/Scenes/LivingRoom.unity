@@ -409,6 +409,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenario: {fileID: 11400000, guid: 8102bc6746d29b94dbf3d466589bbe74, type: 2}
   scenarioObj: {fileID: 1495301820}
+  img: {fileID: 1632888990, guid: ecf36dd54b7f410428d6b18a027a31cf, type: 3}
+  spriteSheetSprites: []
 --- !u!4 &239076772
 Transform:
   m_ObjectHideFlags: 0
@@ -1140,8 +1142,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.5, y: -41.9}
-  m_SizeDelta: {x: 148, y: 179}
+  m_AnchoredPosition: {x: 13.7, y: -24.2}
+  m_SizeDelta: {x: 124, y: 168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &929316840
 MonoBehaviour:
@@ -1201,15 +1203,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 239076771}
-        m_TargetAssemblyTypeName: QuestionManager, Assembly-CSharp
-        m_MethodName: loadScenario
-        m_Mode: 1
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+        m_MethodName: handleClick
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Alexa
           m_BoolArgument: 0
         m_CallState: 1
 --- !u!114 &929316842
@@ -1232,7 +1234,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 649e102891ec1fb47a9691e6337331f9, type: 3}
+  m_Sprite: {fileID: 1122691165, guid: fc1ec524f0a7cbb49b43435e3ec1e866, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1875,7 +1877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583645754526697808, guid: 82c09d04ffcd9fd408ad43212643d75b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6517017277703045615, guid: 82c09d04ffcd9fd408ad43212643d75b, type: 3}
       propertyPath: m_Type
