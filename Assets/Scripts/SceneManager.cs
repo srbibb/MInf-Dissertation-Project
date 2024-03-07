@@ -13,17 +13,25 @@ public class SceneManager : MonoBehaviour
     TMP_Text recipientText;
     int recipientindex = 0;
     int questionindex = 0;
-    bool selectionMode;
-    bool deviceChoice; //when player switches select mode
-    public Sprite img;
-    public Sprite[] spriteSheetSprites;
+    int selectionMode = 1; // which decision player is currently making - is iot or is not iot - 1 is yes 2 is no
+    bool deviceChoiceMode; // when player switches select mode
+    //need something that checks player has done all objects when they click to continue and stops if they haven't
+    //fix buttons being super fernickety somehow? needing to click off them to select smth else?
+    Dictionary<string, GameObject> objDict = new Dictionary<string, GameObject>();
+    Dictionary<string, Sprite[]> spritesDict = new Dictionary<string, Sprite[]>();
+    Dictionary<string, int> choiceDict = new Dictionary<string,int>(); //not sure if this is the best way? how to store correct answers? just do it in array and have list of objects and answers? or save their choices in array
+    // in order of dictionary with correct answers might be better than both in dict or both in array bc then can check dict actually
+    Dictionary<string, int> answerDict = new Dictionary<string, int>(); //if dict not necessary just make array
 
     // Start is called before the first frame update
     void Start()
     {
         scenarioObj.SetActive(false);
-        selectionMode = true;
-        deviceChoice = false;
+        deviceChoiceMode = true;
+        objDict.Add("SofaL", GameObject.Find("SofaL"));
+        objDict.Add("SofaR", GameObject.Find("SofaR"));
+        objDict["SofaL"].GetComponent<Button>().enabled = false; // so they don't interfere with headphones, turn back on when doing scenarios to add flavour text
+        objDict["SofaR"].GetComponent<Button>().enabled = false;
     }
 
     // Update is called once per frame
@@ -35,26 +43,36 @@ public class SceneManager : MonoBehaviour
     }
 
     public void handleClick(string objName){
-        if (selectionMode == true) {
-            toggleSelection(objName); //also needs way for multiple objects - maybe pass id as var, also pass selection mode (yes or no)
-        } else if (selectionMode == false) {
+        if (deviceChoiceMode == true) {
+            toggleSelection(objName); 
+        } else if (deviceChoiceMode == false) {
             loadScenario(); //work out way to handle multiple objects
         }
     }
 
-    void toggleSelection(string objName){
-        // SpriteRenderer sr = GameObject.Find("Alexa").GetComponent<SpriteRenderer>();
-        // if (deviceChoice == true) {
-        //     sr.sprite = spriteSheetSprites[0];
-        // } else {
-        //     Debug.Log("hi");
-        //     sr.sprite = spriteSheetSprites[1];
-        // }
-        Image comp = GameObject.Find(objName).GetComponent<Image>();
-        spriteSheetSprites = Resources.LoadAll<Sprite>(objName + "Sprites"); //prob change so only loads it once - maybe store in dictionary and check if in there
-        comp.sprite = spriteSheetSprites[2];
-        //comp.SetNativeSize();
+    public void toggleSelectionMode(int setting) {  //should i be using switch cases instead of if everywhere?
+        selectionMode = setting;
     }
+
+    void toggleSelection(string objName){
+        string spriteName = objName + "Sprites";
+        if (!objDict.ContainsKey(objName)) {
+            objDict.Add(objName, GameObject.Find(objName));
+            spritesDict.Add(spriteName, Resources.LoadAll<Sprite>(spriteName));
+            choiceDict.Add(objName, selectionMode);
+        }
+        Image comp = objDict[objName].GetComponent<Image>();
+        comp.sprite = spritesDict[spriteName][selectionMode];
+        choiceDict[objName] = selectionMode;
+        // foreach (KeyValuePair<string, int> kvp in choiceDict)
+        // {
+        //     Debug.Log(string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value));
+        // }
+    }
+
+    // void changeMode() { //for switching to scenario mode - revert all sprites to normal, set buttons inactive, change mode bool
+
+    // }
 
     void loadScenario(){
         scenarioObj.SetActive(true);
@@ -63,13 +81,10 @@ public class SceneManager : MonoBehaviour
         questionText = GameObject.Find("Question").GetComponent<TMP_Text>();
         if (scenario.messages[0].question != null) {
             questionText.SetText(scenario.messages[0].text + scenario.messages[0].question[questionindex].purpose + "?");
-            recipientText = GameObject.Find("Recipient").GetComponent<TMP_Text>();
+            recipientText = GameObject.Find("Recipient").GetComponent<TMP_Text>(); //probably cache this at start instead of calling it every time, same with any other finds
             recipientText.SetText(scenario.messages[0].question[questionindex].recipients[0]);
         } else {
             Debug.Log("Error: no question found"); //hide question bit and print dialogue text
-            //if you can click through a selection I think that would be an impressive demo
-            //response doesn't need to go anywhere - just that you can open dialogue (on little mockup phone - improve later), make selection, further selection, phone closes,
-            //can continue game
         }
     }
 

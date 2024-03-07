@@ -8,7 +8,7 @@ public class TextHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //gameObject.GetComponent<RectTransform>().localScale = Vector3.one;
     }
 
     // Update is called once per frame
