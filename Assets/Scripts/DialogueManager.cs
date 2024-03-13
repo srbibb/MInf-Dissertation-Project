@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
 
     public void startDialogue(int cur, string name) {
         if (!dialogDict.ContainsKey(name)) {
-            dialogDict.Add(name, Resources.LoadAll<Dialogue>(name)[0]);
+            dialogDict.Add(name, Resources.Load<Dialogue>("Dialogue/" + name));
         }
         dialog = dialogDict[name];
         current = cur;

@@ -296,6 +296,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
+--- !u!114 &116033136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2850021229799507019, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
+  m_PrefabInstance: {fileID: 92886387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &215711810
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +580,13 @@ MonoBehaviour:
   scenario: {fileID: 11400000, guid: 8102bc6746d29b94dbf3d466589bbe74, type: 2}
   scenarioObj: {fileID: 217832570}
   dialogMan: {fileID: 2058053355}
+  toggs:
+  - {fileID: 116033136}
+  - {fileID: 1933098381}
+  - {fileID: 2015121490}
+  - {fileID: 1741063565}
+  - {fileID: 1238420247}
+  - {fileID: 1529314780}
 --- !u!4 &239076772
 Transform:
   m_ObjectHideFlags: 0
@@ -2487,6 +2505,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229570045}
   m_CullTransparentMesh: 1
+--- !u!114 &1238420247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6713931763164259253, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
+  m_PrefabInstance: {fileID: 92886387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1261863598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3190,6 +3219,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506331300}
   m_CullTransparentMesh: 1
+--- !u!114 &1529314780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3445701041731702596, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
+  m_PrefabInstance: {fileID: 92886387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1741063565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3893215198836397999, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
+  m_PrefabInstance: {fileID: 92886387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1817399994
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,6 +3486,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theButton: {fileID: 1921027802}
+--- !u!114 &1933098381 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7844202155794451761, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
+  m_PrefabInstance: {fileID: 92886387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1986223044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3524,9 +3586,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 0}
-  dialog: {fileID: 0}
   textbox: {fileID: 0}
   active: 0
+--- !u!114 &2015121490 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4879396212914184709, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
+  m_PrefabInstance: {fileID: 92886387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2058053354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,7 +3629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueBox: {fileID: 372746955}
-  dialog: {fileID: 11400000, guid: dae637bbd3fb6af488fd8db5da56233f, type: 2}
   textbox: {fileID: 1360184497}
   active: 0
 --- !u!4 &2058053356

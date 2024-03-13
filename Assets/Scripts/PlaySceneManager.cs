@@ -8,10 +8,11 @@ using System.Linq;
 public class PlaySceneManager : MonoBehaviour
 {
     //public TMP_Text response;
-    public Scenario scenario;
+    Scenario scenario;
     public GameObject scenarioObj;
     TMP_Text questionText;
     TMP_Text[] recipientText = new TMP_Text[3];
+    GameObject[] recipientBox = new GameObject[3];
     int recipientindex = 0;
     int questionindex = 0;
     int selectionMode = 1; // which decision player is currently making - is iot or is not iot - 1 is yes 2 is no
@@ -25,17 +26,26 @@ public class PlaySceneManager : MonoBehaviour
     int[] answers;
     //Dictionary<(string, string), string> alexaRes = new Dictionary<(string, string), string>(); //(recipient, purpose), choice
     //2d list with question and each recipient response
-    List<Result> alexaRes = new List<Result>();
+    Dictionary<string, List<Result>> results = new Dictionary<string, List<Result>>();
     //needs to get device obj to know where to save
     ToggleGroup[] toggleGroups = new ToggleGroup[3];
+    GameObject[] groups = new GameObject[3];
+    public Toggle[] toggs = new Toggle[6];
+    string objectName;
 
     // Start is called before the first frame update
     void Start()
     {
         questionText = GameObject.Find("Question").GetComponent<TMP_Text>();
+        recipientBox[0] = GameObject.Find("RecipientBg1");
+        recipientBox[1] = GameObject.Find("RecipientBg2");
+        recipientBox[2] = GameObject.Find("RecipientBg3");
         recipientText[0] = GameObject.Find("Recipient1").GetComponent<TMP_Text>();
         recipientText[1] = GameObject.Find("Recipient2").GetComponent<TMP_Text>();
         recipientText[2] = GameObject.Find("Recipient3").GetComponent<TMP_Text>();
+        groups[0] = GameObject.Find("Group1");
+        groups[1] = GameObject.Find("Group2");
+        groups[2] = GameObject.Find("Group3");
         toggleGroups[0] = GameObject.Find("Group1").GetComponent<ToggleGroup>();
         toggleGroups[1] = GameObject.Find("Group2").GetComponent<ToggleGroup>();
         toggleGroups[2] = GameObject.Find("Group3").GetComponent<ToggleGroup>();
@@ -63,7 +73,11 @@ public class PlaySceneManager : MonoBehaviour
             toggleSelection(objName); 
         } else if (deviceChoiceMode == false) {
             //check if flavour text, check if scenario already complete
-            loadScenario(); //work out way to handle multiple objects
+            if(results.Keys.Count== 0) {
+                loadScenario(objName);
+            }else if (!results.ContainsKey(objName)) {
+                loadScenario(objName);
+            }
         }
     }
 
@@ -75,7 +89,7 @@ public class PlaySceneManager : MonoBehaviour
         string spriteName = objName + "Sprites";
         if (!objDict.ContainsKey(objName)) {
             objDict.Add(objName, GameObject.Find(objName));
-            spritesDict.Add(spriteName, Resources.LoadAll<Sprite>(spriteName));
+            spritesDict.Add(spriteName, Resources.LoadAll<Sprite>("Sprites/" + spriteName));
             choiceDict.Add(objName, selectionMode);
         }
         Image comp = objDict[objName].GetComponent<Image>();
@@ -83,27 +97,44 @@ public class PlaySceneManager : MonoBehaviour
         choiceDict[objName] = selectionMode;
     }
 
-    void loadScenario(){
+    void loadScenario(string objName){
+        objectName = objName;
+        scenario = Resources.Load<Scenario>("Scenarios/" + objName);
+        results.Add(objName, new List<Result>());
         scenarioObj.SetActive(true);
         questionindex = 0;
-        recipientindex = 0;
         //check how many recipients and adjust if 2 or 1
         if (scenario.question[questionindex] != null) {
-            questionText.SetText(scenario.question[questionindex].text + scenario.question[questionindex].purpose + "?");
-            recipientText[0].SetText(scenario.question[questionindex].recipients[0]);
-            recipientText[1].SetText(scenario.question[questionindex].recipients[1]);
-            recipientText[2].SetText(scenario.question[questionindex].recipients[2]);
+            setQuestion();
         } else {
             Debug.Log("Error: no question found"); //hide question bit and print dialogue text
         }
     }
 
-    public void changeQuestion(int choice){
-        if (recipientindex < scenario.question[questionindex].recipients.Length-1) {
-            recipientindex += 1;
-            recipientText[0].SetText(scenario.question[questionindex].recipients[recipientindex]);
-        } 
-    }
+    //void setLayout(int recipientNo) {
+        //will need to change with actual drawn ver ig
+        //for 3 - 1. x-372 y-25 2.x45 y-25 3. x466 y-25 (recipient text and boxes about 1 off each other)
+        // ans boxes 1. yes x-452 y-174 no y-381 2. yes x186 y-174 3. yes x185 y-174
+        //for 2 - 1. x-217 y-25 2. x324 y-25
+        // ans boxes 1. yes x-208 y-174 no y-381 2. yes x624
+        //for 1 x14 y-25
+        // ans boxe 1. yes x155 y-174 no y-381
+    //     switch (recipientNo) 
+    //     {
+    //         case 1:
+    //             recipientBox[0].GetComponent<Transform>().position = new Vector3(45,-25, 0);
+    //             toggs[0].GetComponent<Transform>().position = new Vector3(155, -174, 0);
+    //             toggs[1].GetComponent<Transform>().position = new Vector3(155, -381, 0);
+    //             recipientBox[1].SetActive(false);
+    //             recipientBox[2].SetActive(false);
+    //             groups[1].SetActive(false);
+    //             break;
+    //         //case 2:
+    //         //case 3:
+    //     }
+    //     //recipientBox[0].GetComponent<Transform>().position = new Vector3(0,0,0);
+    // }
+
 
     public void finishSelection() {
         if (choiceDict.Count == PointCalc.getAnswers().Count) { //actually make it when continue button is clicked AND this is reached so user has chance to change answers if they want
@@ -118,6 +149,7 @@ public class PlaySceneManager : MonoBehaviour
                 }
             }
             //feedback on choices now? presumably, so they know which options are interactable for scenarios
+            //TODO give points feedback with pointscalc etc
             //also make non iot non interactable/add flavour text - need some brancing for that in handle click lol
             GameObject.Find("SelectModeCanvas").SetActive(false);
             dialogMan.startDialogue(4, "PCDialogue");
@@ -128,26 +160,49 @@ public class PlaySceneManager : MonoBehaviour
 
     public void Submit() {
         recipientindex = 0;
-        foreach (ToggleGroup tGroup in toggleGroups) {
+        Question currQuestion = scenario.question[questionindex];
+        for (int i=0; i < currQuestion.recipients.Length; i++) {
+            ToggleGroup tGroup = toggleGroups[i];
             Toggle toggle = tGroup.ActiveToggles().FirstOrDefault();
             //need to use recipient index here to add each one seapartely
             //also make it so can't redo items
-            alexaRes.Add(new Result(scenario.question[questionindex].text, scenario.question[questionindex].recipients[recipientindex], 
+            results[objectName].Add(new Result(scenario.question[questionindex].text, scenario.question[questionindex].recipients[recipientindex], 
                 scenario.question[questionindex].purpose, toggle.name));
             recipientindex +=1;
-        }
-        foreach (var val in alexaRes) {
-            Debug.Log(val.choice);
         }
 
         if (questionindex < scenario.question.Length-1){
             questionindex += 1;
-            questionText.SetText(scenario.question[questionindex].text + scenario.question[questionindex].purpose + "?");
-            recipientText[0].SetText(scenario.question[questionindex].recipients[0]);
-            recipientText[1].SetText(scenario.question[questionindex].recipients[1]);
-            recipientText[2].SetText(scenario.question[questionindex].recipients[2]);
+            setQuestion();
         } else {
             scenarioObj.SetActive(false);
+            foreach (var val in results[objectName]) {
+                Debug.Log(val.choice);
+            }
+            objectName = null;
+        }
+        
+    }
+
+    void setQuestion() {
+        Question currQuestion = scenario.question[questionindex];
+        questionText.SetText(currQuestion.text + currQuestion.purpose + "?");
+        recipientText[0].SetText(currQuestion.recipients[0]);
+        if (currQuestion.recipients.Length > 1){
+            recipientText[1].SetText(currQuestion.recipients[1]);
+            groups[1].SetActive(true);
+            recipientBox[1].SetActive(true);
+        } else {
+            groups[1].SetActive(false);
+            recipientBox[1].SetActive(false);
+        }
+        if (currQuestion.recipients.Length > 2) {
+            recipientText[2].SetText(currQuestion.recipients[2]);
+            groups[2].SetActive(true);
+            recipientBox[2].SetActive(true);
+        } else {
+            groups[2].SetActive(false);
+            recipientBox[2].SetActive(false);
         }
     }
 }
