@@ -16,9 +16,11 @@ MonoBehaviour:
   messages:
   - text: I don't think I've made a decision for everything yet. I should keep looking...
     next: -1
+  - text: Finally, home from the Dr's. I have a lot to do today...
+    next: 2
   - text: My kid is really into these Internet of Things devices. We decided to get
       some, but they still need to be set up.
-    next: 2
+    next: 3
   - text: I don't really know about these things, so they wrote me a note to explain
       it.
     next: -2

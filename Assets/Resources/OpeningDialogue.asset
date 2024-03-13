@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2556a868c586625489b4be576956be4e, type: 3}
+  m_Name: OpeningDialogue
+  m_EditorClassIdentifier: 
+  speaker: You
+  messages:
+  - text: I'm waiting at the Dr's office and I have nothing to do. I guess I'll read
+      a magazine.
+    next: 1
+  - text: I may as well do one of their personality quizzes to pass the time. Let's
+      see...
+    next: 2
+  - text: '"Do you agree with the following security principles/norms?"'
+    next: -1
+  - text: What a strange personality quiz...
+    next: -1

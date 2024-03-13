@@ -6,10 +6,11 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public GameObject dialogueBox;
-    public Dialogue dialog; //store dialogues in dict and scenarios
+    Dialogue dialog; //store dialogues in dict and scenarios
     public TMP_Text textbox;
     public bool active = false;
     int current = 0; //how to set this for first msg - pass starting point?
+    Dictionary<string, Dialogue> dialogDict = new Dictionary<string, Dialogue>();
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,11 @@ public class DialogueManager : MonoBehaviour
         } 
     }
 
-    public void startDialogue(int cur) {
+    public void startDialogue(int cur, string name) {
+        if (!dialogDict.ContainsKey(name)) {
+            dialogDict.Add(name, Resources.LoadAll<Dialogue>(name)[0]);
+        }
+        dialog = dialogDict[name];
         current = cur;
         toggleTextbox();
         advanceText();
@@ -37,7 +42,7 @@ public class DialogueManager : MonoBehaviour
 
     void advanceText() {
         int next;
-        if (current != -1){ //dialogue remaining to show
+        if (current > -1){ //dialogue remaining to show
             next = dialog.messages[current].next;
             textbox.text = (dialog.speaker + ": " + dialog.messages[current].text);
             current = next; 

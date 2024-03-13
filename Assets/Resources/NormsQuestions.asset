@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2556a868c586625489b4be576956be4e, type: 3}
+  m_Name: NormsQuestions
+  m_EditorClassIdentifier: 
+  speaker: 
+  messages:
+  - text: I would not want to share data with my close friends.
+    next: 1
+  - text: I would not want to share data with my partner.
+    next: 2
+  - text: I would keep information like reminders private unless there was a good
+      reason to share them.
+    next: 3
+  - text: I would not want to share data with my housekeeper.
+    next: 4
+  - text: I would keep sleep information like my sleep schedule private.
+    next: 5
+  - text: I would keep information like my contacts private.
+    next: 6
+  - text: I would keep voice command information like voice recordings private.
+    next: 7
+  - text: I would keep email information private.
+    next: 8
+  - text: I would keep information like my bank account details private.
+    next: 9
+  - text: I would not want to share data with my neighbours.
+    next: 10
+  - text: I would not want to share data with my visitors in general.
+    next: 11
+  - text: I would keep video call information private.
+    next: 12
+  - text: I would keep my data private unless there was a good reason to share it
+    next: 13
+  - text: I would not want to share data with unrelated companies/organisations.
+    next: 14
+  - text: I would not want to share data with advertisers.
+    next: -2
