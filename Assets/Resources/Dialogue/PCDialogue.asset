@@ -26,3 +26,7 @@ MonoBehaviour:
     next: -2
   - text: Ok, now I've found all the IoT devices I should look at their privacy settings.
     next: -1
+  - text: Whoops, the back of the note tells me which are IoT devices.
+    next: 6
+  - text: 'Here''s the correct answers: (press space when you''re finished)'
+    next: -3

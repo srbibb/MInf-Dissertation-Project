@@ -32,6 +32,7 @@ public class PlaySceneManager : MonoBehaviour
     GameObject[] groups = new GameObject[3];
     public Toggle[] toggs = new Toggle[6];
     string objectName;
+    bool ansDisplayed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +66,9 @@ public class PlaySceneManager : MonoBehaviour
     {
         if(Input.GetKeyDown("escape")) {
             Application.Quit();
+        } 
+        if(Input.GetKeyDown("space") && ansDisplayed == true) {
+            changeMode(true);
         } 
     }
 
@@ -139,8 +143,25 @@ public class PlaySceneManager : MonoBehaviour
     public void finishSelection() {
         if (choiceDict.Count == PointCalc.getAnswers().Count) { //actually make it when continue button is clicked AND this is reached so user has chance to change answers if they want
             deviceChoiceMode = false;
-            PointCalc.getOverallPoints(choiceDict); //is this where i want to call this? where do i want to have the points? i guess i display straight away so they know which devices are iot
+            (int, int) points = PointCalc.getOverallPoints(choiceDict); //is this where i want to call this? where do i want to have the points? i guess i display straight away so they know which devices are iot
             // somehow do: here are all the iot devices
+            dialogMan.startDialogue(5, "PCDialogue");
+        } else {
+            dialogMan.startDialogue(0, "PCDialogue"); 
+        }
+    }
+
+    public void changeMode(bool showingAns) {
+        if (!showingAns) {
+            Dictionary<string, int> ans = PointCalc.getAnswers();
+            foreach (string objName in objDict.Keys) {
+                if (spritesDict.ContainsKey(objName + "Sprites")) {
+                    objDict[objName].GetComponent<Image>().sprite = spritesDict[objName + "Sprites"][ans[objName]];
+                }
+                ansDisplayed = true;
+            }
+        } else {
+            ansDisplayed = false;
             objDict["SofaL"].GetComponent<Button>().enabled = true;
             objDict["SofaR"].GetComponent<Button>().enabled = true;
             foreach (string objName in objDict.Keys) {
@@ -153,8 +174,6 @@ public class PlaySceneManager : MonoBehaviour
             //also make non iot non interactable/add flavour text - need some brancing for that in handle click lol
             GameObject.Find("SelectModeCanvas").SetActive(false);
             dialogMan.startDialogue(4, "PCDialogue");
-        } else {
-            dialogMan.startDialogue(0, "PCDialogue"); 
         }
     }
 

@@ -577,7 +577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8edd9e387773c0b419b46c666d5af259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenario: {fileID: 11400000, guid: 8102bc6746d29b94dbf3d466589bbe74, type: 2}
   scenarioObj: {fileID: 217832570}
   dialogMan: {fileID: 2058053355}
   toggs:
@@ -3588,6 +3587,7 @@ MonoBehaviour:
   dialogueBox: {fileID: 0}
   textbox: {fileID: 0}
   active: 0
+  manager: {fileID: 0}
 --- !u!114 &2015121490 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4879396212914184709, guid: 062887fa3c6975847a4a27f1fab6df79, type: 3}
@@ -3631,6 +3631,7 @@ MonoBehaviour:
   dialogueBox: {fileID: 372746955}
   textbox: {fileID: 1360184497}
   active: 0
+  manager: {fileID: 239076771}
 --- !u!4 &2058053356
 Transform:
   m_ObjectHideFlags: 0
