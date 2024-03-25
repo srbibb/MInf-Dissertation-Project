@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class PlaySceneManager : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class PlaySceneManager : MonoBehaviour
     public Toggle[] toggs = new Toggle[6];
     string objectName;
     bool ansDisplayed = false;
+    public GameObject helpNote;
+    public GameObject finishBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -69,18 +72,27 @@ public class PlaySceneManager : MonoBehaviour
         } 
         if(Input.GetKeyDown("space") && ansDisplayed == true) {
             changeMode(true);
-        } 
+        }
+        if(Input.GetMouseButtonDown(0) && helpNote.activeInHierarchy) {
+            helpNote.SetActive(false);
+        }
+
+
     }
 
     public void handleClick(string objName){
-        if (deviceChoiceMode == true) {
+        if (deviceChoiceMode == true && !dialogMan.active) {
             toggleSelection(objName); 
-        } else if (deviceChoiceMode == false) {
+        } else if (deviceChoiceMode == false && !dialogMan.active && !ansDisplayed && !scenarioObj.activeInHierarchy) {
             //check if flavour text, check if scenario already complete
-            if(results.Keys.Count== 0) {
-                loadScenario(objName);
-            }else if (!results.ContainsKey(objName)) {
-                loadScenario(objName);
+            if (Resources.Load<Scenario>("Scenarios/" + objName) != null) {
+                if(results.Keys.Count== 0) {
+                    loadScenario(objName);
+                }else if (!results.ContainsKey(objName)) {
+                    loadScenario(objName);
+                } else if (results.ContainsKey(objName)) {
+                    dialogMan.startDialogue(7, "PCDialogue");
+                }
             }
         }
     }
@@ -143,7 +155,7 @@ public class PlaySceneManager : MonoBehaviour
     public void finishSelection() {
         if (choiceDict.Count == PointCalc.getAnswers().Count) { //actually make it when continue button is clicked AND this is reached so user has chance to change answers if they want
             deviceChoiceMode = false;
-            (int, int) points = PointCalc.getOverallPoints(choiceDict); //is this where i want to call this? where do i want to have the points? i guess i display straight away so they know which devices are iot
+            PointCalc.calcOverallPoints(choiceDict); //is this where i want to call this? where do i want to have the points? i guess i display straight away so they know which devices are iot
             // somehow do: here are all the iot devices
             dialogMan.startDialogue(5, "PCDialogue");
         } else {
@@ -169,6 +181,7 @@ public class PlaySceneManager : MonoBehaviour
                     objDict[objName].GetComponent<Image>().sprite = spritesDict[objName + "Sprites"][0];
                 }
             }
+            //TODO: fix ipad line display when hiding lines etc
             //feedback on choices now? presumably, so they know which options are interactable for scenarios
             //TODO give points feedback with pointscalc etc
             //also make non iot non interactable/add flavour text - need some brancing for that in handle click lol
@@ -195,10 +208,13 @@ public class PlaySceneManager : MonoBehaviour
             setQuestion();
         } else {
             scenarioObj.SetActive(false);
-            foreach (var val in results[objectName]) {
-                Debug.Log(val.choice);
-            }
+            // foreach (var val in results[objectName]) {
+            //     Debug.Log(val.choice);
+            // }
             objectName = null;
+            if (results.Count == 4) {
+                finishBtn.SetActive(true);
+            }
         }
         
     }
@@ -224,6 +240,15 @@ public class PlaySceneManager : MonoBehaviour
             recipientBox[2].SetActive(false);
         }
     }
+    
+    public void showNote() {
+        helpNote.SetActive(true);
+    }
+
+    public void finishScene() {
+        PointCalc.setResults(results);
+        SceneManager.LoadScene("Results");
+    }
 }
 
 public class Result
@@ -238,5 +263,9 @@ public class Result
         this.recipient = r.Trim();
         this.purpose = p.Trim();
         this.choice = c.Trim();
+    }
+
+    public string printResult() {
+        return string.Format("Question: {0} Recipient: {1} Purpose: {2} Choice: {3}", this.question, this.recipient, this.purpose, this.choice);
     }
 }

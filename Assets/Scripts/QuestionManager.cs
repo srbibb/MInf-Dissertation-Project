@@ -19,13 +19,17 @@ public class QuestionManager : MonoBehaviour
     {
         questionText.text = "Welcome to our Privacy Norms Quiz!";
         dialogMan.startDialogue(0, "OpeningDialogue");
-        currentDialog = Resources.LoadAll<Dialogue>("NormsQuestions")[0];
+        currentDialog = Resources.LoadAll<Dialogue>("Dialogue/NormsQuestions")[0];
         currDialog = "norms";
     }
 
     // Update is called once per frame
+    //TODO: can't click questions qhen textbox up (same for playmanager)
     void Update()
     {
+        if(Input.GetKeyDown("escape")) {
+            Application.Quit();
+        } 
         if (dialogMan.active == false && doingQs == false) {
             questionText.text = (currentDialog.messages[0].text);
             doingQs = true;
@@ -36,6 +40,9 @@ public class QuestionManager : MonoBehaviour
     }
 
     public void advanceText(int choice) {
+        if (dialogMan.active) {
+            return;
+        }
         if (currDialog == "norms") {
             normsChoices[questionindex] = choice;
         } else if (currDialog == "westin") {
@@ -47,11 +54,16 @@ public class QuestionManager : MonoBehaviour
         } else if (questionindex == -2) {
             currDialog = "westin";
             questionindex = 0;
-            currentDialog = Resources.LoadAll<Dialogue>("WestinQuestions")[0];
+            GameObject.Find("IDK").SetActive(false); //-87 and -269
+            GameObject.Find("Agr").GetComponent<Transform>().Translate(0, -0.4f, 0);
+            GameObject.Find("Disagr").GetComponent<Transform>().Translate(0, 0.4f, 0);
+            currentDialog = Resources.LoadAll<Dialogue>("Dialogue/WestinQuestions")[0];
             questionText.text = (currentDialog.messages[questionindex].text);
         } else {
             dialogMan.startDialogue(3, "OpeningDialogue");
             currDialog = "finished";
+            PointCalc.setNorms(normsChoices);
+            PointCalc.setWestin(westinChoices);
         }
     }
 }

@@ -47,6 +47,9 @@ public class DialogueManager : MonoBehaviour
             next = dialog.messages[current].next;
             textbox.text = (dialog.speaker + ": " + dialog.messages[current].text);
             current = next; 
+        } else if (current == -2) {
+            toggleTextbox();
+            manager.showNote();
         } else if (current == -3) {
             toggleTextbox();
             manager.changeMode(false);

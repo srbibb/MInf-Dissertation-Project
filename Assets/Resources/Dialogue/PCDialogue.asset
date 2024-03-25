@@ -16,7 +16,7 @@ MonoBehaviour:
   messages:
   - text: I don't think I've made a decision for everything yet. I should keep looking...
     next: -1
-  - text: Finally, home from the Dr's. I have a lot to do today...
+  - text: Finally, home from the doctor's. I have a lot to do today...
     next: 2
   - text: My kid is really into these Internet of Things devices. We decided to get
       some, but they still need to be set up.
@@ -26,7 +26,9 @@ MonoBehaviour:
     next: -2
   - text: Ok, now I've found all the IoT devices I should look at their privacy settings.
     next: -1
-  - text: Whoops, the back of the note tells me which are IoT devices.
+  - text: Whoops, I just noticed the back of the note tells me which are IoT devices.
     next: 6
   - text: 'Here''s the correct answers: (press space when you''re finished)'
     next: -3
+  - text: I've already done that one.
+    next: -1
