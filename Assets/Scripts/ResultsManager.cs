@@ -19,6 +19,8 @@ public class ResultsManager : MonoBehaviour
     private const string HomePageUrl = "https://www.spongehammergames.com/";
     string[] toDisplay = {"", "", ""};
     public GameObject[] tipsDisplay = new GameObject[3];
+    public GameObject[] tipsBg = new GameObject[2];
+    public GameObject westinBadge;
 
     // Start is called before the first frame update
     void Start()
@@ -67,23 +69,30 @@ public class ResultsManager : MonoBehaviour
     void displayWestin() {
         string category = "";
         string explanation = "";
+        int badge;
         //how to handle i don't know for westin scale? just hide the button?
         if ((westinChoices[0] == 5 || westinChoices[0] == 4) && (westinChoices[1] == 1 || westinChoices[1] == 2) 
             && (westinChoices[2] == 1 || westinChoices[2] == 2))//Fundamentalist
         {
             category = "Fundamentalist";
-            explanation = "This group sees privacy as an especially high value, rejects the claims of many organizations to need or be entitled to get personal information for their "
-                +"business or governmental programs, thinks more individuals should simply refuse to give out information they are asked for, and favors enactment of strong federal and state laws "
-                +"to secure privacy rights and control organizational discretion. ";
+            // explanation = "This group sees privacy as an especially high value, rejects the claims of many organizations to need or be entitled to get personal information for their "
+            //     +"business or governmental programs, thinks more individuals should simply refuse to give out information they are asked for, and favors enactment of strong federal and state laws "
+            //     +"to secure privacy rights and control organizational discretion. ";
+            explanation = "This is neither the most or least common group. You see your privacy as highly important, and don't agree that organisations are entitled to it. You probably think "
+                + "people should refuse to disclose their information, and support legislation to secure rights surrounding privacy.";
+            badge = 1;
 
         }
         else if((westinChoices[0] == 1 || westinChoices[0] == 2) && (westinChoices[1] == 5 || westinChoices[1] == 4) 
             && (westinChoices[2] == 5 || westinChoices[2] == 4))//Unconcerned
         {
             category = "Unconcerned";
-            explanation = "This is the least common group. This group doesn’t know what the “privacy fuss” is all about, supports the benefits of most organizational programs over warnings about privacy abuse, "
-                + "has little problem with supplying their personal information to government authorities or businesses, and sees no need for creating another government bureaucracy (a “Federal "
-                + "Big Brother) to protect someone’s privacy. ";
+            // explanation = "This is the least common group. This group doesn’t know what the “privacy fuss” is all about, supports the benefits of most organizational programs over warnings about privacy abuse, "
+            //     + "has little problem with supplying their personal information to government authorities or businesses, and sees no need for creating another government bureaucracy (a “Federal "
+            //     + "Big Brother) to protect someone’s privacy. ";
+            explanation = "This is the least common group. You might not understand what the big fuss about privacy is, and you're not too worried about providing your personal information to authorities "
+                + "or other organisations.";
+            badge = 0;
         }
         else//Pragmatist
         {
@@ -94,10 +103,12 @@ public class ResultsManager : MonoBehaviour
             //     + " involved being a critical decisional factor. The pragmatists favor voluntary standards and consumer choice over legislation and government enforcement. But they will back"
             //     + " legislation when they think not enough is being done - or meaningfully done - by voluntary means."; //TODO: REWRITE THESE
             explanation = "This is the most common group. You weigh the value of disclosing your personal information, taking into account the relevant risks to privacy and security. The trust you have"
-                + " in a company or organisation is likely a deciding factor in whether to share your information. You probably favour the ability for the consumer to choice whether to share their"
-                + "information themselves, but support government legislation and enforcement when you feel not enough is done by voluntary means.";
+                + " in a company or organisation is likely a deciding factor in whether to share your information. You value the ability to choose, "
+                + " but support legislation when necessary.";
+            badge = 2;
         }
-        westinDisplay.text = category;
+        westinDisplay.text = "You're in the category Privacy " + category + ".";
+        westinBadge.GetComponent<Image>().sprite = Resources.LoadAll<Sprite>("Sprites/WestinBadges")[badge];
         westinExp.text = explanation;
     }
 
@@ -173,7 +184,7 @@ public class ResultsManager : MonoBehaviour
         mostShared = itemList[noShared.ToList().IndexOf(mostSharedVal)];
         leastSharedVal = noShared.Min();
         leastShared = itemList[noShared.ToList().IndexOf(leastSharedVal)];
-        shareDisplay.text = string.Format("You shared your {0} information the most times: {1} times.\nYou share your {2} information the least times: {3} times", mostShared, mostSharedVal, leastShared, leastSharedVal);
+        shareDisplay.text = string.Format("You shared your {0} information the most times: {1} times. You share your {2} information the least times: {3} times. Here's some tips based on your answers and gameplay choices.", mostShared, mostSharedVal, leastShared, leastSharedVal);
         putToDisplay(mismatch);
 
     }
@@ -201,10 +212,12 @@ public class ResultsManager : MonoBehaviour
             int notFilled = 2;
             if (System.Array.IndexOf(toDisplay, "") < 2) {
                 tipsDisplay[2].SetActive(false);
+                tipsBg[1].SetActive(false);
                 notFilled = 1;
             }
             if (System.Array.IndexOf(toDisplay, "") < 2) {
                 tipsDisplay[1].SetActive(false);
+                tipsBg[0].SetActive(false);
                 notFilled = 0;
             }
             tipsDisplay[notFilled].GetComponent<TMP_Text>().text = "You did a good job being consistent to your privacy preferences. Well done!";
