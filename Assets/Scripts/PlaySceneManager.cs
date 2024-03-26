@@ -81,6 +81,16 @@ public class PlaySceneManager : MonoBehaviour
     }
 
     public void handleClick(string objName){
+        Dictionary<string, int> flavourText = new Dictionary<string,int>{
+            {"SofaL", 0}, 
+            {"SofaR", 0},
+            {"Headphones", 1},
+            {"Notebook",2},
+            {"Clock", 3},
+            {"Guitar", 4},
+            {"CoffeeCup", 5},
+            {"Light", 6},
+            {"Book", 7}};
         if (deviceChoiceMode == true && !dialogMan.active) {
             toggleSelection(objName); 
         } else if (deviceChoiceMode == false && !dialogMan.active && !ansDisplayed && !scenarioObj.activeInHierarchy) {
@@ -88,11 +98,13 @@ public class PlaySceneManager : MonoBehaviour
             if (Resources.Load<Scenario>("Scenarios/" + objName) != null) {
                 if(results.Keys.Count== 0) {
                     loadScenario(objName);
-                }else if (!results.ContainsKey(objName)) {
+                } else if (!results.ContainsKey(objName)) {
                     loadScenario(objName);
                 } else if (results.ContainsKey(objName)) {
                     dialogMan.startDialogue(7, "PCDialogue");
                 }
+            } else if (flavourText.ContainsKey(objName)) {
+                dialogMan.startDialogue(flavourText[objName], "FlavourDialogue");
             }
         }
     }
@@ -119,12 +131,7 @@ public class PlaySceneManager : MonoBehaviour
         results.Add(objName, new List<Result>());
         scenarioObj.SetActive(true);
         questionindex = 0;
-        //check how many recipients and adjust if 2 or 1
-        if (scenario.question[questionindex] != null) {
-            setQuestion();
-        } else {
-            Debug.Log("Error: no question found"); //hide question bit and print dialogue text
-        }
+        setQuestion();
     }
 
     //void setLayout(int recipientNo) {

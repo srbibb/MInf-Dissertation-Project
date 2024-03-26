@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2556a868c586625489b4be576956be4e, type: 3}
+  m_Name: FlavourDialogue
+  m_EditorClassIdentifier: 
+  speaker: You
+  messages:
+  - text: I can sit down when I'm finished!
+    next: -1
+  - text: I'm going to listen to some music later.
+    next: -1
+  - text: Looking forward to ticking this off my to-do list!
+    next: -1
+  - text: Is that the time already?
+    next: -1
+  - text: It's been a while since I've cracked the old guitar out.
+    next: -1
+  - text: I hope my tea hasn't gone cold.
+    next: -1
+  - text: The smart lights are set up as part of the voice assistant, so I don't
+      need to do this one.
+    next: -1
+  - text: This book is so good I struggle to put it down!
+    next: -1
