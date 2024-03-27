@@ -36,6 +36,7 @@ public class PlaySceneManager : MonoBehaviour
     bool ansDisplayed = false;
     public GameObject helpNote;
     public GameObject finishBtn;
+    public TMP_Text scenarioTitle;
 
     // Start is called before the first frame update
     void Start()
@@ -127,37 +128,28 @@ public class PlaySceneManager : MonoBehaviour
 
     void loadScenario(string objName){
         objectName = objName;
+        string title = "";
+        switch (objectName) {
+            case "Alexa": 
+                title = "Smart Assistant - Voice recording information";
+                break;
+            case "Litter":
+                title = "Smart Litter - Email information";
+                break;
+            case "TV":
+                title = "Smart TV - Voice call information";
+                break;
+            case "Watch":
+                title = "Smart Watch - Reminder information";
+                break;
+        }
+        scenarioTitle.text = "Privacy Settings: " + title;
         scenario = Resources.Load<Scenario>("Scenarios/" + objName);
         results.Add(objName, new List<Result>());
         scenarioObj.SetActive(true);
         questionindex = 0;
         setQuestion();
     }
-
-    //void setLayout(int recipientNo) {
-        //will need to change with actual drawn ver ig
-        //for 3 - 1. x-372 y-25 2.x45 y-25 3. x466 y-25 (recipient text and boxes about 1 off each other)
-        // ans boxes 1. yes x-452 y-174 no y-381 2. yes x186 y-174 3. yes x185 y-174
-        //for 2 - 1. x-217 y-25 2. x324 y-25
-        // ans boxes 1. yes x-208 y-174 no y-381 2. yes x624
-        //for 1 x14 y-25
-        // ans boxe 1. yes x155 y-174 no y-381
-    //     switch (recipientNo) 
-    //     {
-    //         case 1:
-    //             recipientBox[0].GetComponent<Transform>().position = new Vector3(45,-25, 0);
-    //             toggs[0].GetComponent<Transform>().position = new Vector3(155, -174, 0);
-    //             toggs[1].GetComponent<Transform>().position = new Vector3(155, -381, 0);
-    //             recipientBox[1].SetActive(false);
-    //             recipientBox[2].SetActive(false);
-    //             groups[1].SetActive(false);
-    //             break;
-    //         //case 2:
-    //         //case 3:
-    //     }
-    //     //recipientBox[0].GetComponent<Transform>().position = new Vector3(0,0,0);
-    // }
-
 
     public void finishSelection() {
         if (choiceDict.Count == PointCalc.getAnswers().Count) { //actually make it when continue button is clicked AND this is reached so user has chance to change answers if they want
@@ -188,10 +180,6 @@ public class PlaySceneManager : MonoBehaviour
                     objDict[objName].GetComponent<Image>().sprite = spritesDict[objName + "Sprites"][0];
                 }
             }
-            //TODO: fix ipad line display when hiding lines etc
-            //feedback on choices now? presumably, so they know which options are interactable for scenarios
-            //TODO give points feedback with pointscalc etc
-            //also make non iot non interactable/add flavour text - need some brancing for that in handle click lol
             GameObject.Find("SelectModeCanvas").SetActive(false);
             dialogMan.startDialogue(4, "PCDialogue");
         }
@@ -203,8 +191,6 @@ public class PlaySceneManager : MonoBehaviour
         for (int i=0; i < currQuestion.recipients.Length; i++) {
             ToggleGroup tGroup = toggleGroups[i];
             Toggle toggle = tGroup.ActiveToggles().FirstOrDefault();
-            //need to use recipient index here to add each one seapartely
-            //also make it so can't redo items
             results[objectName].Add(new Result(scenario.question[questionindex].text, scenario.question[questionindex].recipients[recipientindex], 
                 scenario.question[questionindex].purpose, toggle.name));
             recipientindex +=1;
@@ -215,9 +201,6 @@ public class PlaySceneManager : MonoBehaviour
             setQuestion();
         } else {
             scenarioObj.SetActive(false);
-            // foreach (var val in results[objectName]) {
-            //     Debug.Log(val.choice);
-            // }
             objectName = null;
             if (results.Count == 4) {
                 finishBtn.SetActive(true);

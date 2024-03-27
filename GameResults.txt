@@ -1,60 +1,60 @@
 TV:
-Question: Can we share your video call information with the following recipents Recipient: Partner Purpose:  Choice: No
+Question: Can we share your video call information with the following recipents Recipient: Partner Purpose:  Choice: Yes
 Question: Can we share your video call information with the following recipents Recipient: Neighbour Purpose:  Choice: Yes
 Question: Can we share your video call information with the following recipents Recipient: Friends Purpose:  Choice: Yes
-Question: Can we share your video call information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: No
+Question: Can we share your video call information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: Yes
 Question: Can we share your video call information with the following recipents Recipient: Neighbour Purpose: for the purpose of improving the service Choice: Yes
 Question: Can we share your video call information with the following recipents Recipient: Friends Purpose: for the purpose of improving the service Choice: Yes
-Question: Can we share your video call information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: No
+Question: Can we share your video call information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: Yes
 Question: Can we share your video call information with the following recipents Recipient: Law Enforcement Purpose:  Choice: Yes
-Question: Can we share your video call information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
+Question: Can we share your video call information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
 Question: Can we share your video call information with the following recipents Recipient: Unrelated Organisations Purpose: for the purpose of personalised adverts Choice: Yes
-Question: Can we share your video call information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: No
-Question: Can we share your video call information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
-Question: Can we share your video call information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: No
-Alexa:
-Question: Can we share your voice recording information with the following recipents Recipient: Partner Purpose:  Choice: No
-Question: Can we share your voice recording information with the following recipents Recipient: Neighbour Purpose:  Choice: Yes
-Question: Can we share your voice recording information with the following recipents Recipient: Friends Purpose:  Choice: Yes
-Question: Can we share your voice recording information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: No
-Question: Can we share your voice recording information with the following recipents Recipient: Neighbour Purpose: for the purpose of improving the service Choice: Yes
-Question: Can we share your voice recording information with the following recipents Recipient: Friends Purpose: for the purpose of improving the service Choice: Yes
-Question: Can we share your voice recording information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: No
-Question: Can we share your voice recording information with the following recipents Recipient: Law Enforcement Purpose:  Choice: Yes
-Question: Can we share your voice recording information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
-Question: Can we share your voice recording information with the following recipents Recipient: Unrelated Organisations Purpose: for the purpose of personalised adverts Choice: Yes
-Question: Can we share your voice recording information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: No
-Question: Can we share your voice recording information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
-Question: Can we share your voice recording information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: No
+Question: Can we share your video call information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: Yes
+Question: Can we share your video call information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
+Question: Can we share your video call information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: Yes
 Litter:
-Question: Can we share your email information with the following recipents Recipient: Partner Purpose:  Choice: No
+Question: Can we share your email information with the following recipents Recipient: Partner Purpose:  Choice: Yes
 Question: Can we share your email information with the following recipents Recipient: Neighbour Purpose:  Choice: Yes
 Question: Can we share your email information with the following recipents Recipient: Friends Purpose:  Choice: Yes
-Question: Can we share your email information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: No
+Question: Can we share your email information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: Yes
 Question: Can we share your email information with the following recipents Recipient: Neighbour Purpose: for the purpose of improving the service Choice: Yes
 Question: Can we share your email information with the following recipents Recipient: Friends Purpose: for the purpose of improving the service Choice: Yes
-Question: Can we share your email information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: No
+Question: Can we share your email information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: Yes
 Question: Can we share your email information with the following recipents Recipient: Law Enforcement Purpose:  Choice: Yes
-Question: Can we share your email information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
+Question: Can we share your email information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
 Question: Can we share your email information with the following recipents Recipient: Unrelated Organisations Purpose: for the purpose of personalised adverts Choice: Yes
-Question: Can we share your email information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: No
-Question: Can we share your email information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
-Question: Can we share your email information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: No
+Question: Can we share your email information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: Yes
+Question: Can we share your email information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
+Question: Can we share your email information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: Yes
+Alexa:
+Question: Can we share your voice recording information with the following recipents Recipient: Partner Purpose:  Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Neighbour Purpose:  Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Friends Purpose:  Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Neighbour Purpose: for the purpose of improving the service Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Friends Purpose: for the purpose of improving the service Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Law Enforcement Purpose:  Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Unrelated Organisations Purpose: for the purpose of personalised adverts Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
+Question: Can we share your voice recording information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: Yes
 Watch:
-Question: Can we share your reminder information with the following recipents Recipient: Partner Purpose:  Choice: No
+Question: Can we share your reminder information with the following recipents Recipient: Partner Purpose:  Choice: Yes
 Question: Can we share your reminder information with the following recipents Recipient: Neighbour Purpose:  Choice: Yes
 Question: Can we share your reminder information with the following recipents Recipient: Friends Purpose:  Choice: Yes
-Question: Can we share your reminder information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: No
+Question: Can we share your reminder information with the following recipents Recipient: Partner Purpose: for the purpose of improving the service Choice: Yes
 Question: Can we share your reminder information with the following recipents Recipient: Neighbour Purpose: for the purpose of improving the service Choice: Yes
 Question: Can we share your reminder information with the following recipents Recipient: Friends Purpose: for the purpose of improving the service Choice: Yes
-Question: Can we share your reminder information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: No
+Question: Can we share your reminder information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose:  Choice: Yes
 Question: Can we share your reminder information with the following recipents Recipient: Law Enforcement Purpose:  Choice: Yes
-Question: Can we share your reminder information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
+Question: Can we share your reminder information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
 Question: Can we share your reminder information with the following recipents Recipient: Unrelated Organisations Purpose: for the purpose of personalised adverts Choice: Yes
-Question: Can we share your reminder information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: No
-Question: Can we share your reminder information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: No
-Question: Can we share your reminder information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: No
+Question: Can we share your reminder information with the following recipents Recipient: Assistant Provider (Amazon, Google etc.) Purpose: for the purpose of improving the service Choice: Yes
+Question: Can we share your reminder information with the following recipents Recipient: Advertising Agencies Purpose: for the purpose of personalised adverts Choice: Yes
+Question: Can we share your reminder information with the following recipents Recipient: Law Enforcement Purpose: for the purpose of investigating a crime Choice: Yes
 
 Points:(5, 11)
-Norms Choices:2,3,3,3,3,3,3,3,3,3,3,3,3,3,3
-Westin Choices:4,2,4
+Norms Choices:0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Westin Choices:0,0,0
