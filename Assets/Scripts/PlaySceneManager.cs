@@ -8,27 +8,20 @@ using UnityEngine.SceneManagement;
 
 public class PlaySceneManager : MonoBehaviour
 {
-    //public TMP_Text response;
     Scenario scenario;
     public GameObject scenarioObj;
     TMP_Text questionText;
     TMP_Text[] recipientText = new TMP_Text[3];
     GameObject[] recipientBox = new GameObject[3];
-    int recipientindex = 0;
-    int questionindex = 0;
+    int recipientIndex = 0;
+    int questionIndex = 0;
     int selectionMode = 1; // which decision player is currently making - is iot or is not iot - 1 is yes 2 is no
     bool deviceChoiceMode; // when player switches select mode
-    //need something that checks player has done all objects when they click to continue and stops if they haven't
     Dictionary<string, GameObject> objDict = new Dictionary<string, GameObject>();
     Dictionary<string, Sprite[]> spritesDict = new Dictionary<string, Sprite[]>();
-    Dictionary<string, int> choiceDict = new Dictionary<string,int>(); //not sure if this is the best way? how to store correct answers? just do it in array and have list of objects and answers? or save their choices in array
-    // in order of dictionary with correct answers might be better than both in dict or both in array bc then can check dict actually
-    public DialogueManager dialogMan;
-    int[] answers;
-    //Dictionary<(string, string), string> alexaRes = new Dictionary<(string, string), string>(); //(recipient, purpose), choice
-    //2d list with question and each recipient response
+    Dictionary<string, int> choiceDict = new Dictionary<string,int>(); 
+    public DialogueManager dialogueMan;
     Dictionary<string, List<Result>> results = new Dictionary<string, List<Result>>();
-    //needs to get device obj to know where to save
     ToggleGroup[] toggleGroups = new ToggleGroup[3];
     GameObject[] groups = new GameObject[3];
     public Toggle[] toggs = new Toggle[6];
@@ -59,10 +52,9 @@ public class PlaySceneManager : MonoBehaviour
         deviceChoiceMode = true;
         objDict.Add("SofaL", GameObject.Find("SofaL"));
         objDict.Add("SofaR", GameObject.Find("SofaR"));
-        objDict["SofaL"].GetComponent<Button>().enabled = false; // so they don't interfere with headphones, turn back on when doing scenarios to add flavour text
+        objDict["SofaL"].GetComponent<Button>().enabled = false; 
         objDict["SofaR"].GetComponent<Button>().enabled = false;
-        dialogMan.startDialogue(1, "PCDialogue");
-        //TODO: can click objs while textbox up - make it so can't do that
+        dialogueMan.startDialogue(1, "PCDialogue");
     }
 
     // Update is called once per frame
@@ -92,25 +84,24 @@ public class PlaySceneManager : MonoBehaviour
             {"CoffeeCup", 5},
             {"Light", 6},
             {"Book", 7}};
-        if (deviceChoiceMode == true && !dialogMan.active) {
+        if (deviceChoiceMode == true && !dialogueMan.active) {
             toggleSelection(objName); 
-        } else if (deviceChoiceMode == false && !dialogMan.active && !ansDisplayed && !scenarioObj.activeInHierarchy) {
-            //check if flavour text, check if scenario already complete
+        } else if (deviceChoiceMode == false && !dialogueMan.active && !ansDisplayed && !scenarioObj.activeInHierarchy) {
             if (Resources.Load<Scenario>("Scenarios/" + objName) != null) {
                 if(results.Keys.Count== 0) {
                     loadScenario(objName);
                 } else if (!results.ContainsKey(objName)) {
                     loadScenario(objName);
                 } else if (results.ContainsKey(objName)) {
-                    dialogMan.startDialogue(7, "PCDialogue");
+                    dialogueMan.startDialogue(7, "PCDialogue");
                 }
             } else if (flavourText.ContainsKey(objName)) {
-                dialogMan.startDialogue(flavourText[objName], "FlavourDialogue");
+                dialogueMan.startDialogue(flavourText[objName], "FlavourDialogue");
             }
         }
     }
 
-    public void toggleSelectionMode(int setting) {  //should i be using switch cases instead of if everywhere?
+    public void toggleSelectionMode(int setting) {
         selectionMode = setting;
     }
 
@@ -147,18 +138,17 @@ public class PlaySceneManager : MonoBehaviour
         scenario = Resources.Load<Scenario>("Scenarios/" + objName);
         results.Add(objName, new List<Result>());
         scenarioObj.SetActive(true);
-        questionindex = 0;
+        questionIndex = 0;
         setQuestion();
     }
 
     public void finishSelection() {
-        if (choiceDict.Count == PointCalc.getAnswers().Count) { //actually make it when continue button is clicked AND this is reached so user has chance to change answers if they want
+        if (choiceDict.Count == PointCalc.getAnswers().Count) {
             deviceChoiceMode = false;
-            PointCalc.calcOverallPoints(choiceDict); //is this where i want to call this? where do i want to have the points? i guess i display straight away so they know which devices are iot
-            // somehow do: here are all the iot devices
-            dialogMan.startDialogue(5, "PCDialogue");
+            PointCalc.calcOverallPoints(choiceDict);
+            dialogueMan.startDialogue(5, "PCDialogue");
         } else {
-            dialogMan.startDialogue(0, "PCDialogue"); 
+            dialogueMan.startDialogue(0, "PCDialogue"); 
         }
     }
 
@@ -181,23 +171,23 @@ public class PlaySceneManager : MonoBehaviour
                 }
             }
             GameObject.Find("SelectModeCanvas").SetActive(false);
-            dialogMan.startDialogue(4, "PCDialogue");
+            dialogueMan.startDialogue(4, "PCDialogue");
         }
     }
 
     public void Submit() {
-        recipientindex = 0;
-        Question currQuestion = scenario.question[questionindex];
+        recipientIndex = 0;
+        Question currQuestion = scenario.question[questionIndex];
         for (int i=0; i < currQuestion.recipients.Length; i++) {
             ToggleGroup tGroup = toggleGroups[i];
             Toggle toggle = tGroup.ActiveToggles().FirstOrDefault();
-            results[objectName].Add(new Result(scenario.question[questionindex].text, scenario.question[questionindex].recipients[recipientindex], 
-                scenario.question[questionindex].purpose, toggle.name));
-            recipientindex +=1;
+            results[objectName].Add(new Result(scenario.question[questionIndex].text, scenario.question[questionIndex].recipients[recipientIndex], 
+                scenario.question[questionIndex].purpose, toggle.name));
+            recipientIndex +=1;
         }
 
-        if (questionindex < scenario.question.Length-1){
-            questionindex += 1;
+        if (questionIndex < scenario.question.Length-1){
+            questionIndex += 1;
             setQuestion();
         } else {
             scenarioObj.SetActive(false);
@@ -210,7 +200,7 @@ public class PlaySceneManager : MonoBehaviour
     }
 
     void setQuestion() {
-        Question currQuestion = scenario.question[questionindex];
+        Question currQuestion = scenario.question[questionIndex];
         questionText.SetText(currQuestion.text + currQuestion.purpose + "?");
         recipientText[0].SetText(currQuestion.recipients[0]);
         if (currQuestion.recipients.Length > 1){

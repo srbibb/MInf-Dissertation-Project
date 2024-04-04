@@ -34,4 +34,7 @@ MonoBehaviour:
     next: -1
   - text: To set them up, first I need to work out what items in this room are IoT
       devices in the first place.
+    next: 9
+  - text: I can select a mode in the top corner, and then click on an object to make
+      my decision for each one.
     next: 3

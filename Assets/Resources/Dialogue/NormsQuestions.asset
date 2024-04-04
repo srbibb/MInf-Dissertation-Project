@@ -39,7 +39,7 @@ MonoBehaviour:
     next: 11
   - text: I would keep video call information private.
     next: 12
-  - text: I would keep my data private unless there was a good reason to share it.
+  - text: I would keep my data private unless there were a good reason to share it.
     next: 13
   - text: I would not want to share data with unrelated companies/organisations.
     next: 14

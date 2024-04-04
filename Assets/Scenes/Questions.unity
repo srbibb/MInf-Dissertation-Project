@@ -256,9 +256,9 @@ MonoBehaviour:
   m_fontSize: 46
   m_fontSizeBase: 46
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 25
-  m_fontSizeMax: 70
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 44
+  m_fontSizeMax: 46
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -484,6 +484,7 @@ MonoBehaviour:
   dialogueBox: {fileID: 1805097926}
   textbox: {fileID: 182822448}
   active: 0
+  manager: {fileID: 0}
 --- !u!1 &782086782
 GameObject:
   m_ObjectHideFlags: 0

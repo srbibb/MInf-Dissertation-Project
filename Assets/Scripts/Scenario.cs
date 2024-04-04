@@ -6,17 +6,13 @@ using UnityEngine;
 
 [System.Serializable]
 public class Scenario : ScriptableObject {
-    public int objectID;
     public string objectName;
     public Question[] question;
 }
 
 [System.Serializable]
-public class Question { //maybe make it can we share info with x for purpose of y and not have separate box? 
-//also put question under question not message text, and find somewhere for intro text etc.
-//there's def a better way to lay this out tbh
+public class Question { 
     public string text;
     public string[] recipients;
     public string purpose;
-    //public string[] choice;
 }

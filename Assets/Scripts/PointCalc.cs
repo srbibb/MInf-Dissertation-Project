@@ -10,7 +10,7 @@ public static class PointCalc
     static Dictionary<string, List<Result>> results = new Dictionary<string, List<Result>>();
 
     public static Dictionary<string, int> getAnswers() {
-        Dictionary<string, int> answerDict = new Dictionary<string, int>{ //update as items are added
+        Dictionary<string, int> answerDict = new Dictionary<string, int>{
             { "Alexa", 1 },
             { "TV", 1 },
             { "Guitar", 2},
@@ -26,7 +26,6 @@ public static class PointCalc
     }
 
     public static void calcOverallPoints(Dictionary<string, int> choiceDict) {
-        // save answers in scriptable object and read into dict on open game?
         int total = 0;
         Dictionary<string, int> answerDict = getAnswers();
         foreach (var entry in answerDict.Keys) {
@@ -63,9 +62,5 @@ public static class PointCalc
     
     public static Dictionary<string, List<Result>> getResults() {
         return results;
-    }
-
-    public static void generateResults() {
-        // makes fun fancy results stuff for end of game/reporting after they pick, the in depth stuff about their choices
     }
 }

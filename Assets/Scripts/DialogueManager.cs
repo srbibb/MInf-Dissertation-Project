@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text textbox;
     public bool active = false;
     int current = 0; //how to set this for first msg - pass starting point?
-    Dictionary<string, Dialogue> dialogDict = new Dictionary<string, Dialogue>();
+    Dictionary<string, Dialogue> dialogueDict = new Dictionary<string, Dialogue>();
     public PlaySceneManager manager;
     // Start is called before the first frame update
     void Start()
@@ -27,10 +27,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void startDialogue(int cur, string name) {
-        if (!dialogDict.ContainsKey(name)) {
-            dialogDict.Add(name, Resources.Load<Dialogue>("Dialogue/" + name));
+        if (!dialogueDict.ContainsKey(name)) {
+         dialogueDict.Add(name, Resources.Load<Dialogue>("Dialogue/" + name));
         }
-        dialog = dialogDict[name];
+        dialog = dialogueDict[name];
         current = cur;
         toggleTextbox();
         advanceText();

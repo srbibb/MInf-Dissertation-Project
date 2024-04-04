@@ -12,20 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22fb2e62c40f2c4aba9fa7e1e0c1f5a, type: 3}
   m_Name: Watch
   m_EditorClassIdentifier: 
-  objectID: 0
   objectName: Watch
   question:
   - text: Can we share your reminder information with the following recipents
     recipients:
     - Partner
     - Neighbour
-    - Friends
+    - Visitors in general
     purpose: 
   - text: Can we share your reminder information with the following recipents
     recipients:
     - Partner
     - Neighbour
-    - Friends
+    - Visitors in general
     purpose: ' for the purpose of improving the service'
   - text: Can we share your reminder information with the following recipents
     recipients:
@@ -36,7 +35,7 @@ MonoBehaviour:
     recipients:
     - Advertising Agencies
     - Unrelated Organisations
-    purpose: for the purpose of personalised adverts
+    purpose: 
   - text: Can we share your reminder information with the following recipents
     recipients:
     - Assistant Provider (Amazon, Google etc.)

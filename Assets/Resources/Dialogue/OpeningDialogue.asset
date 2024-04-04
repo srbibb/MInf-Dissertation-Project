@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speaker: You
   messages:
-  - text: I'm waiting at the doctor's office and I have nothing to do. I guess I'll
-      read a magazine. (Click to continue)
+  - text: I'm waiting at the doctor's with nothing to do. I guess I'll read a magazine.
+      (Click anywhere to continue)
     next: 1
   - text: I may as well do one of their personality quizzes to pass the time. Let's
       see...

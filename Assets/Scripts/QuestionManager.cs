@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class QuestionManager : MonoBehaviour
 {
-    public DialogueManager dialogMan;
+    public DialogueManager dialogueMan;
     public TMP_Text questionText;
     int questionindex = 0;
-    Dialogue currentDialog;
-    string currDialog;
+    Dialogue currentDialogue;
+    string currDialogue;
     int[] normsChoices = new int[15];
     int[] westinChoices = new int[3];
     bool doingQs = false;
@@ -18,9 +18,9 @@ public class QuestionManager : MonoBehaviour
     void Start()
     {
         questionText.text = "Welcome to our Privacy Norms Quiz!";
-        dialogMan.startDialogue(0, "OpeningDialogue");
-        currentDialog = Resources.LoadAll<Dialogue>("Dialogue/NormsQuestions")[0];
-        currDialog = "norms";
+        dialogueMan.startDialogue(0, "OpeningDialogue");
+        currentDialogue = Resources.LoadAll<Dialogue>("Dialogue/NormsQuestions")[0];
+        currDialogue = "norms";
     }
 
     // Update is called once per frame
@@ -30,38 +30,38 @@ public class QuestionManager : MonoBehaviour
         if(Input.GetKeyDown("escape")) {
             Application.Quit();
         } 
-        if (dialogMan.active == false && doingQs == false) {
-            questionText.text = (currentDialog.messages[0].text);
+        if (dialogueMan.active == false && doingQs == false) {
+            questionText.text = (currentDialogue.messages[0].text);
             doingQs = true;
         }
-        if(Input.GetMouseButtonDown(0) && currDialog == "finished") {
+        if(Input.GetMouseButtonDown(0) && currDialogue == "finished") {
             SceneManager.LoadScene("LivingRoom");
         }
     }
 
     public void advanceText(int choice) {
-        if (dialogMan.active) {
+        if (dialogueMan.active) {
             return;
         }
-        if (currDialog == "norms") {
+        if (currDialogue == "norms") {
             normsChoices[questionindex] = choice;
-        } else if (currDialog == "westin") {
+        } else if (currDialogue == "westin") {
             westinChoices[questionindex] = choice;
         }
-        questionindex = currentDialog.messages[questionindex].next;
+        questionindex = currentDialogue.messages[questionindex].next;
         if (questionindex > -1){ //dialogue remaining to show
-            questionText.text = (currentDialog.messages[questionindex].text);
+            questionText.text = (currentDialogue.messages[questionindex].text);
         } else if (questionindex == -2) {
-            currDialog = "westin";
+            currDialogue = "westin";
             questionindex = 0;
             GameObject.Find("IDK").SetActive(false); //-87 and -269
             GameObject.Find("Agr").GetComponent<Transform>().Translate(0, -0.4f, 0);
             GameObject.Find("Disagr").GetComponent<Transform>().Translate(0, 0.4f, 0);
-            currentDialog = Resources.LoadAll<Dialogue>("Dialogue/WestinQuestions")[0];
-            questionText.text = (currentDialog.messages[questionindex].text);
+            currentDialogue = Resources.LoadAll<Dialogue>("Dialogue/WestinQuestions")[0];
+            questionText.text = (currentDialogue.messages[questionindex].text);
         } else {
-            dialogMan.startDialogue(3, "OpeningDialogue");
-            currDialog = "finished";
+            dialogueMan.startDialogue(3, "OpeningDialogue");
+            currDialogue = "finished";
             PointCalc.setNorms(normsChoices);
             PointCalc.setWestin(westinChoices);
         }

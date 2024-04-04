@@ -16,11 +16,11 @@ public class ResultsManager : MonoBehaviour
     int[] westinChoices = new int[3];
     Dictionary<string, List<Result>> results;
     public TMP_Text shareDisplay;
-    private const string HomePageUrl = "https://www.spongehammergames.com/";
     string[] toDisplay = {"", "", ""};
     public GameObject[] tipsDisplay = new GameObject[3];
     public GameObject[] tipsBg = new GameObject[2];
     public GameObject westinBadge;
+    string category = "";
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +48,6 @@ public class ResultsManager : MonoBehaviour
                 explanation += "You should familiarise yourself with the kinds of smart devices available these days. As you saw, there are some surprising ones, such as smart litter boxes and smart toothbrushes!" +
                     "Being able to recognise them will allow you to protect your data in the future.";
                 break;
-                //TODO: insert link to some resource for them to learn more to be accessible and all 
             
             case < 7:
                 explanation += "You got some of them right, but it would be worth brushing up on the kinds of smart devices available thes days. As you saw, there are some surprising ones, " +
@@ -67,7 +66,6 @@ public class ResultsManager : MonoBehaviour
     }
 
     void displayWestin() {
-        string category = "";
         string explanation = "";
         int badge;
         //how to handle i don't know for westin scale? just hide the button?
@@ -75,9 +73,6 @@ public class ResultsManager : MonoBehaviour
             && (westinChoices[2] == 1 || westinChoices[2] == 2))//Fundamentalist
         {
             category = "Fundamentalist";
-            // explanation = "This group sees privacy as an especially high value, rejects the claims of many organizations to need or be entitled to get personal information for their "
-            //     +"business or governmental programs, thinks more individuals should simply refuse to give out information they are asked for, and favors enactment of strong federal and state laws "
-            //     +"to secure privacy rights and control organizational discretion. ";
             explanation = "This is neither the most or least common group. You see your privacy as highly important, and don't agree that organisations are entitled to it. You probably think "
                 + "people should refuse to disclose their information, and support legislation to secure rights surrounding privacy.";
             badge = 1;
@@ -87,9 +82,6 @@ public class ResultsManager : MonoBehaviour
             && (westinChoices[2] == 5 || westinChoices[2] == 4))//Unconcerned
         {
             category = "Unconcerned";
-            // explanation = "This is the least common group. This group doesn’t know what the “privacy fuss” is all about, supports the benefits of most organizational programs over warnings about privacy abuse, "
-            //     + "has little problem with supplying their personal information to government authorities or businesses, and sees no need for creating another government bureaucracy (a “Federal "
-            //     + "Big Brother) to protect someone’s privacy. ";
             explanation = "This is the least common group. You might not understand what the big fuss about privacy is, and you're not too worried about providing your personal information to authorities "
                 + "or other organisations.";
             badge = 0;
@@ -97,11 +89,6 @@ public class ResultsManager : MonoBehaviour
         else//Pragmatist
         {
             category = "Pragmatist";
-            // explanation = "This is the most common group. This group weighs the value to them and society of various business or government programs calling for personal information, examines the relevance"
-            //     + " and social propriety of the information sought, wants to know the potential risks to privacy or security of their information, looks to see whether fair information practices are being"
-            //     + " widely enough observed, and then decides whether they will agree or disagree with specific information activities – with their trust in the particular industry or company"
-            //     + " involved being a critical decisional factor. The pragmatists favor voluntary standards and consumer choice over legislation and government enforcement. But they will back"
-            //     + " legislation when they think not enough is being done - or meaningfully done - by voluntary means."; //TODO: REWRITE THESE
             explanation = "This is the most common group. You weigh the value of disclosing your personal information, taking into account the relevant risks to privacy and security. The trust you have"
                 + " in a company or organisation is likely a deciding factor in whether to share your information. You value the ability to choose, "
                 + " but support legislation when necessary.";
@@ -123,20 +110,20 @@ public class ResultsManager : MonoBehaviour
         results = PointCalc.getResults();
         List<List<Result>> resultList = new List<List<Result>> {results["Alexa"], results["TV"], results["Watch"], results["Litter"]};
         int i = 0;
-        // compare close friends, partner, neighbours (repeat for each data type)
+        // compare visitors in general, partner, neighbours (repeat for each data type)
         foreach (List<Result> r in resultList) {
-            if ((normsChoices[0] > 3) && ((r[2].choice == "Yes") || (r[5].choice == "Yes"))) { //close friends
+            if ((normsChoices[12] > 3) && ((r[0].choice == "Yes") || (r[1].choice == "Yes") || (r[2].choice == "Yes") || (r[6].choice == "Yes") || (r[7].choice == "Yes") || (r[8].choice == "Yes") || (r[9].choice == "Yes"))) { //no purpose
                 mismatch[0] += 1;
+            } 
+            if ((normsChoices[10] > 3) && ((r[2].choice == "Yes") || (r[5].choice == "Yes"))) { //visitors in general
+                mismatch[1] += 1;
             }
             if ((normsChoices[1] > 3) && ((r[0].choice == "Yes") || (r[3].choice == "Yes"))) { //partner
-                mismatch[1] += 1;
+                mismatch[2] += 1;
             } 
             if ((normsChoices[9] > 3) && ((r[1].choice == "Yes") || (r[4].choice == "Yes"))) { //neighbour
-                mismatch[2] += 1;
-            }
-            if ((normsChoices[12] > 3) && ((r[0].choice == "Yes") || (r[1].choice == "Yes") || (r[2].choice == "Yes") || (r[6].choice == "Yes") || (r[7].choice == "Yes"))) { //no purpose
                 mismatch[3] += 1;
-            } 
+            }
             // unrelated orgs (repeat for each data type)
             if ((normsChoices[13] > 3) && (r[9].choice == "Yes")) { 
                 mismatch[4] += 1;
@@ -190,18 +177,18 @@ public class ResultsManager : MonoBehaviour
     }
 
     void putToDisplay(int[] mismatch) {
-        if (mismatch[3] > 1) {
-            toDisplay[System.Array.IndexOf(toDisplay, "")]  = "You said that you wouldn't want to share your information with no purpose, but during the game scenarios you did so multiple times. "
+        if (mismatch[0] > 1) {
+            toDisplay[System.Array.IndexOf(toDisplay, "")] = "You said that you wouldn't want to share your information with no purpose, but during the game scenarios you did so multiple times. "
                 + "When considering your privacy preferences, it's important not just to consider what you're sharing, but why you're sharing it, and whether you've been told why.";
         }
         int first = checkDataType(mismatch, 6);
-        int second = checkRecipient(mismatch, 0);
+        int second = checkRecipient(mismatch, 1);
         
         if (System.Array.IndexOf(toDisplay, "") != -1 && first != -1) {
-            checkDataType(mismatch, first);
+            checkDataType(mismatch, (first+1));
         }
         if (System.Array.IndexOf(toDisplay, "") != -1 && second != -1) {
-            checkRecipient(mismatch, second);
+            checkRecipient(mismatch, (second+1));
         }
 
         for (int i = 0; i <3; i++) {
@@ -226,36 +213,33 @@ public class ResultsManager : MonoBehaviour
     }
 
     int checkDataType(int[] mismatch, int start) {
+        Debug.Log("start " + start);
         string[] itemList = {"email", "voice recording", "video call", "reminder"};
         int nextFree = -1;
         for (int i = start; i <10; i++) {
             if (mismatch[i] > 1) {
                 nextFree = System.Array.IndexOf(toDisplay, "");
-                toDisplay[System.Array.IndexOf(toDisplay, "")] = "You said that you wouldn't want to share your " + itemList[i-6] + " information, but during the game scenarios "
+                toDisplay[nextFree] = "You said that you wouldn't want to share your " + itemList[i-6] + " information, but during the game scenarios "
                     + "you chose to share it multiple times. It's important to consider whether you're sticking to your own privacy preferences."; // can check still spare slot to add info
-                return nextFree;
+                return i;
             }
         }
-        return nextFree;
+        return -1;
     }
 
     int checkRecipient(int[] mismatch, int start) {
-        string[] recipientList = {"your close friends", "your partner", "your neighbour", "unrelated organisations", "advertisers"};
+        string[] recipientList = {"visitors in general", "your partner", "your neighbour", "unrelated organisations", "advertisers"};
         int nextFree = -1;
-        for (int i = start; i<5; i++) {
+        for (int i = start; i<6; i++) {
             if (mismatch[i] > 1) {
+                Debug.Log(i + " mismatch " + mismatch[i]);
                 nextFree = System.Array.IndexOf(toDisplay, "");
-                toDisplay[System.Array.IndexOf(toDisplay, "")] = "You said that you wouldn't want to share your information with " + recipientList[i] + ", but during the game scenarios "
+                toDisplay[nextFree] = "You said that you wouldn't want to share your information with " + recipientList[i] + ", but during the game scenarios "
                     + "you chose to share it multiple times. It's important to consider not just what you're sharing but who you're sharing it with."; 
-                return nextFree;
+                return i;
             }
         }
-        return nextFree;
-    }
-
-
-    public void openURL(string url) {
-        Application.OpenURL(url);
+        return -1;
     }
 
     void writeResults() {
@@ -269,9 +253,9 @@ public class ResultsManager : MonoBehaviour
             }
         }
         resOutput += ("\nPoints:" + points);
-        string contents = "\nNorms Choices:" + string.Join(",", normsChoices) + "\nWestin Choices:"  + string.Join(",", westinChoices);
+        string contents = "\nNorms Choices:" + string.Join(",", normsChoices) + "\nWestin Choices:"  + string.Join(",", westinChoices) + "\nWestin Category:" + category;
         resOutput += contents;
-        System.IO.File.WriteAllText (fullPath, resOutput);
+        System.IO.File.WriteAllText(fullPath, resOutput);
     }
 
     public void finish(){
